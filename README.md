@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# sjk_lablog
 
-## Getting Started
+개인 학습 기록 블로그. 언어, 컴퓨터 과학, 프레임워크 학습을 기록하고 생각을 구조화하는 실험 공간.
 
-First, run the development server:
+## 기술 스택
+
+- **Next.js 15** App Router + TypeScript
+- **Tailwind CSS v4** + `@tailwindcss/typography`
+- **MDX** (`next-mdx-remote/rsc`) — 마크다운 기반 콘텐츠
+- **react-force-graph-2d** — 태그 네트워크 시각화
+- **Vercel Analytics** + Speed Insights
+
+## 시작하기
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 포스트 작성
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`content/[category]/slug.md` 파일을 생성합니다.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```yaml
+---
+title: "제목"
+date: "2026-03-15"
+category: "framework"       # english | spanish | computerScience | framework
+tags: ["nextjs", "react"]
+excerpt: "한 줄 요약"
+difficulty: "intermediate"  # optional
+studyDuration: 45           # optional: 공부 시간(분)
+---
+```
 
-## Learn More
+## 스크립트
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run dev          # 개발 서버
+npm run build        # 프로덕션 빌드
+npm run type-check   # TypeScript 검사
+npm run lint         # ESLint
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 배포
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Vercel + GitHub Actions CI
