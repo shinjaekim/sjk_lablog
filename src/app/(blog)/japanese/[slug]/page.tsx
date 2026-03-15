@@ -7,20 +7,20 @@ import type { Metadata } from 'next'
 interface Props { params: Promise<{ slug: string }> }
 
 export async function generateStaticParams() {
-  return (await getSlugsByCategory('computerScience')).map((slug) => ({ slug }))
+  return (await getSlugsByCategory('japanese')).map((slug) => ({ slug }))
 }
 export const dynamicParams = false
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const post = await getPostBySlug('computerScience', slug)
+  const post = await getPostBySlug('japanese', slug)
   if (!post) return {}
   return { title: post.frontmatter.title, description: post.frontmatter.excerpt }
 }
 
 export default async function Page({ params }: Props) {
   const { slug } = await params
-  const post = await getPostBySlug('computerScience', slug)
+  const post = await getPostBySlug('japanese', slug)
   if (!post) notFound()
   return (
     <article>

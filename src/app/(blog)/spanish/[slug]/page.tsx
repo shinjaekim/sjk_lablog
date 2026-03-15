@@ -4,15 +4,11 @@ import PostHeader from '@/components/post/PostHeader'
 import MDXContent from '@/components/post/MDXContent'
 import type { Metadata } from 'next'
 
-interface Props {
-  params: Promise<{ slug: string }>
-}
+interface Props { params: Promise<{ slug: string }> }
 
 export async function generateStaticParams() {
-  const slugs = await getSlugsByCategory('spanish')
-  return slugs.map((slug) => ({ slug }))
+  return (await getSlugsByCategory('spanish')).map((slug) => ({ slug }))
 }
-
 export const dynamicParams = false
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -22,11 +18,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: post.frontmatter.title, description: post.frontmatter.excerpt }
 }
 
-export default async function SpanishPostPage({ params }: Props) {
+export default async function Page({ params }: Props) {
   const { slug } = await params
   const post = await getPostBySlug('spanish', slug)
   if (!post) notFound()
-
   return (
     <article>
       <PostHeader post={post} />

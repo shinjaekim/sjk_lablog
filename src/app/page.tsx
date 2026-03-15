@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { getAllPosts, getStatsSummary } from '@/lib/data'
-import { CATEGORIES, CATEGORY_LABELS } from '@/lib/data/types'
+import { CATEGORIES, CATEGORY_LABELS, CATEGORY_EMOJI, CATEGORY_GROUPS } from '@/lib/data/types'
 import PostList from '@/components/post/PostList'
 
 export default async function HomePage() {
@@ -22,7 +22,6 @@ export default async function HomePage() {
         </h1>
         <p className="max-w-xl text-lg text-[var(--color-text-secondary)]">
           학습한 내용을 기록하고 생각을 구조화하는 실험 공간입니다.
-          언어, 컴퓨터 과학, 프레임워크를 탐구합니다.
         </p>
         <div className="flex gap-3">
           <Link
@@ -41,12 +40,11 @@ export default async function HomePage() {
       </section>
 
       {/* Quick Stats */}
-      <section className="mb-12 grid grid-cols-2 gap-4 sm:grid-cols-4">
+      <section className="mb-12 grid grid-cols-3 gap-4">
         {[
           { label: 'Total Posts', value: stats.totalPosts },
           { label: 'Study Hours', value: Math.round(stats.totalStudyMinutes / 60) },
           { label: 'Current Streak', value: `${stats.currentStreak}d` },
-          { label: 'Total Words', value: stats.totalWordCount.toLocaleString() },
         ].map(({ label, value }) => (
           <div
             key={label}
@@ -58,31 +56,39 @@ export default async function HomePage() {
         ))}
       </section>
 
-      {/* Categories */}
+      {/* Categories — grouped */}
       <section className="mb-12">
         <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[var(--color-text-secondary)]">
           Categories
         </h2>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {CATEGORIES.map((cat) => {
-            const catStat = stats.postsPerCategory.find((s) => s.category === cat)
-            const emoji = { english: '🇬🇧', spanish: '🇪🇸', computerScience: '💻', framework: '⚙️' }[cat]
-            return (
-              <Link
-                key={cat}
-                href={`/${cat}`}
-                className="group rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-primary)] p-4 transition-all hover:border-[var(--color-accent)] hover:shadow-sm"
-              >
-                <div className="mb-2 text-2xl">{emoji}</div>
-                <div className="text-sm font-medium group-hover:text-[var(--color-accent)]">
-                  {CATEGORY_LABELS[cat]}
-                </div>
-                <div className="mt-1 text-xs text-[var(--color-text-secondary)]">
-                  {catStat?.postCount ?? 0} posts
-                </div>
-              </Link>
-            )
-          })}
+        <div className="space-y-4">
+          {CATEGORY_GROUPS.map((group) => (
+            <div key={group.label}>
+              <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-[var(--color-text-secondary)] opacity-60">
+                {group.label}
+              </p>
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                {group.categories.map((cat) => {
+                  const catStat = stats.postsPerCategory.find((s) => s.category === cat)
+                  return (
+                    <Link
+                      key={cat}
+                      href={`/${cat}`}
+                      className="group rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-primary)] p-4 transition-all hover:border-[var(--color-accent)] hover:shadow-sm"
+                    >
+                      <div className="mb-2 text-2xl">{CATEGORY_EMOJI[cat]}</div>
+                      <div className="text-sm font-medium group-hover:text-[var(--color-accent)]">
+                        {CATEGORY_LABELS[cat]}
+                      </div>
+                      <div className="mt-1 text-xs text-[var(--color-text-secondary)]">
+                        {catStat?.postCount ?? 0} posts
+                      </div>
+                    </Link>
+                  )
+                })}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 

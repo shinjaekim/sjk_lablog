@@ -253,7 +253,6 @@ export class MarkdownRepository implements IPostRepository {
       (sum, r) => sum + r.durationMinutes,
       0,
     )
-    const totalWordCount = posts.reduce((sum, p) => sum + p.wordCount, 0)
 
     // Study heatmap
     const studyByDate: Record<string, number> = {}
@@ -314,7 +313,6 @@ export class MarkdownRepository implements IPostRepository {
     return {
       totalPosts: posts.length,
       totalStudyMinutes,
-      totalWordCount,
       longestStreak,
       currentStreak,
       postsPerCategory,

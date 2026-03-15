@@ -14,7 +14,6 @@ export default async function StatsPage() {
   const statCards = [
     { label: 'Total Posts', value: stats.totalPosts, unit: 'posts' },
     { label: 'Study Time', value: Math.round(stats.totalStudyMinutes / 60), unit: 'hours' },
-    { label: 'Total Words', value: Math.round(stats.totalWordCount / 1000), unit: 'K words' },
     { label: 'Current Streak', value: stats.currentStreak, unit: 'days' },
     { label: 'Longest Streak', value: stats.longestStreak, unit: 'days' },
     { label: 'Unique Tags', value: stats.mostUsedTags.length, unit: 'tags' },
