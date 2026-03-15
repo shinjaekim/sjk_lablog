@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: ['**']   # 모든 브랜치 push 시 실행
   pull_request:
-    branches: [main]
+    branches: [main]   # main PR 시 실행
 
 jobs:
   quality:
