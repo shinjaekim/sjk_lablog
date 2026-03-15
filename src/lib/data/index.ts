@@ -1,8 +1,12 @@
 import 'server-only'
-import { MarkdownRepository } from './markdown-repository'
-// Future: import { DatabaseRepository } from './database-repository'
 
-const repository = new MarkdownRepository()
+// Phase 1: 마크다운 파일 기반
+// import { MarkdownRepository } from './markdown-repository'
+// const repository = new MarkdownRepository()
+
+// Phase 2: Xata (Postgres) DB 기반
+import { DatabaseRepository } from './database-repository'
+const repository = new DatabaseRepository()
 
 export const getAllPosts = repository.getAllPosts.bind(repository)
 export const getPostBySlug = repository.getPostBySlug.bind(repository)
