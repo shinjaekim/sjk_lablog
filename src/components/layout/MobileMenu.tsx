@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { CATEGORIES, CATEGORY_LABELS } from '@/lib/data/types'
+import { CATEGORY_GROUPS, CATEGORY_LABELS } from '@/lib/data/types'
 
 const NAV_LINKS = [
   { href: '/tags', label: 'Knowledge Map' },
@@ -33,31 +33,36 @@ export default function MobileMenu() {
 
       {open && (
         <div className="absolute left-0 right-0 top-16 z-50 border-b border-[var(--color-border)] bg-[var(--color-bg-primary)] px-4 py-4 shadow-lg">
-          <div className="space-y-1">
-            <p className="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[var(--color-text-secondary)]">
-              Categories
-            </p>
-            {CATEGORIES.map((cat) => (
-              <Link
-                key={cat}
-                href={`/${cat}`}
-                onClick={() => setOpen(false)}
-                className="block rounded-md px-3 py-2 text-sm hover:bg-[var(--color-bg-secondary)]"
-              >
-                {CATEGORY_LABELS[cat]}
-              </Link>
+          <div className="space-y-3">
+            {CATEGORY_GROUPS.map((group) => (
+              <div key={group.label}>
+                <p className="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[var(--color-text-secondary)]">
+                  {group.label}
+                </p>
+                {group.categories.map((cat) => (
+                  <Link
+                    key={cat}
+                    href={`/${cat}`}
+                    onClick={() => setOpen(false)}
+                    className="block rounded-md px-3 py-2 text-sm hover:bg-[var(--color-bg-secondary)]"
+                  >
+                    {CATEGORY_LABELS[cat]}
+                  </Link>
+                ))}
+              </div>
             ))}
-            <div className="my-2 border-t border-[var(--color-border)]" />
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="block rounded-md px-3 py-2 text-sm hover:bg-[var(--color-bg-secondary)]"
-              >
-                {link.label}
-              </Link>
-            ))}
+            <div className="border-t border-[var(--color-border)] pt-2">
+              {NAV_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-md px-3 py-2 text-sm hover:bg-[var(--color-bg-secondary)]"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       )}

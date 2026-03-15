@@ -18,9 +18,10 @@
 
   /* Category colors */
   --cat-english: #3b82f6;
+  --cat-japanese: #ef4444;
   --cat-spanish: #f59e0b;
   --cat-computerScience: #10b981;
-  --cat-framework: #8b5cf6;
+  --cat-programming: #8b5cf6;
 }
 
 /* Dark mode via [data-theme="dark"] on <html> */

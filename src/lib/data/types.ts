@@ -2,19 +2,41 @@
 
 export const CATEGORIES = [
   'english',
+  'japanese',
   'spanish',
   'computerScience',
-  'framework',
+  'programming',
 ] as const
 
 export type Category = (typeof CATEGORIES)[number]
 
 export const CATEGORY_LABELS: Record<Category, string> = {
   english: 'English',
+  japanese: 'Japanese',
   spanish: 'Spanish',
   computerScience: 'Computer Science',
-  framework: 'Framework',
+  programming: 'Programming',
 }
+
+export const CATEGORY_EMOJI: Record<Category, string> = {
+  english: '🇬🇧',
+  japanese: '🇯🇵',
+  spanish: '🇪🇸',
+  computerScience: '💻',
+  programming: '⌨️',
+}
+
+// 헤더/사이드바 그룹핑용
+export const CATEGORY_GROUPS = [
+  {
+    label: 'Languages',
+    categories: ['english', 'japanese', 'spanish'] as Category[],
+  },
+  {
+    label: 'Tech',
+    categories: ['computerScience', 'programming'] as Category[],
+  },
+] as const
 
 // ─── Frontmatter (raw from gray-matter) ──────────────────────────────────────
 
@@ -99,7 +121,6 @@ export interface CategoryStats {
 export interface StatsSummary {
   totalPosts: number
   totalStudyMinutes: number
-  totalWordCount: number
   longestStreak: number
   currentStreak: number
   postsPerCategory: CategoryStats[]

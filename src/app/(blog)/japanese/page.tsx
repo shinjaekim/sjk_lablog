@@ -4,19 +4,19 @@ import PostList from '@/components/post/PostList'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: CATEGORY_LABELS.english,
+  title: CATEGORY_LABELS.japanese,
 }
 
-export default async function EnglishPage() {
-  const posts = await getAllPosts({ category: 'english' })
+export default async function JapanesePage() {
+  const posts = await getAllPosts({ category: 'japanese' })
   return (
     <div>
       <header className="mb-8">
-        <div className="mb-2 text-3xl">{CATEGORY_EMOJI.english}</div>
-        <h1 className="text-2xl font-bold">{CATEGORY_LABELS.english}</h1>
+        <div className="mb-2 text-3xl">{CATEGORY_EMOJI.japanese}</div>
+        <h1 className="text-2xl font-bold">{CATEGORY_LABELS.japanese}</h1>
         <p className="mt-2 text-[var(--color-text-secondary)]">{posts.length} posts</p>
       </header>
-      <PostList posts={posts} emptyMessage="No English posts yet." />
+      <PostList posts={posts} emptyMessage="No Japanese posts yet." />
     </div>
   )
 }
