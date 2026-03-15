@@ -1,7 +1,9 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
+  // MDX rendering is handled by next-mdx-remote/rsc in components
+  // Images from external sources can be added here if needed
+}
 
-export default nextConfig;
+export default nextConfig
